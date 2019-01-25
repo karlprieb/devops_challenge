@@ -1,0 +1,9 @@
+FROM mhart/alpine-node
+
+WORKDIR /
+COPY . .
+
+RUN npm install --prod
+
+EXPOSE 3000
+CMD ["npm", "start"]
