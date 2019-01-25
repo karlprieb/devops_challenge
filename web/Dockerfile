@@ -1,9 +1,14 @@
-FROM mhart/alpine-node
+FROM node:11-alpine
 
-WORKDIR /
-COPY . .
+WORKDIR /app
 
+COPY package.json /app
 RUN npm install --prod
+COPY . /app
 
-EXPOSE 3000
+ENV APP_PORT=8080
+
+EXPOSE $APP_PORT
+HEALTHCHECK CMD curl --fail http://localhost:$APP_PORT || exit 1
+
 CMD ["npm", "start"]
